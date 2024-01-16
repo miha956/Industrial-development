@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
     
@@ -38,6 +39,13 @@ class ProfileViewController: UIViewController {
         addSubviews()
         tuneTableView()
         setupConstraints()
+        
+        #if DEBUG
+        Self.tableView.backgroundColor = .red
+        #else
+        // nothing to do
+        #endif
+        
     }
     
     // MARK: - Actions

@@ -61,7 +61,7 @@ class PhotosTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(detailButton)
         contentView.addSubview(photoStackView)
-        for i in 1...4 {
+        for _ in 1...4 {
             let photo = UIImageView()
             photo.layer.cornerRadius = 6
             photo.clipsToBounds = true

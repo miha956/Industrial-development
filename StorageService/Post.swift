@@ -1,5 +1,5 @@
 //
-//  PostModel.swift
+//  Post.swift
 //  Navigation
 //
 //  Created by Миша Вашкевич on 06.12.2023.
@@ -8,17 +8,17 @@
 import Foundation
 import UIKit
 
-struct Post {
-    let author: String
-    var description: String
-    var image: UIImage?
-    var likes: Int
-    var views: Int
+public struct Post {
+    public let author: String
+    public var description: String
+    public var image: UIImage?
+    public var likes: Int
+    public var views: Int
 }
 
 extension Post {
     
-    static func make() -> [Post] {
+    public static func make() -> [Post] {
         [ 
             Post(
             author: "Justin",
