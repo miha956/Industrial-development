@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A91D33582B570BB000C6C3E5 /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A102AF65A4E0CECE7A60FC /* Pods_Navigation.framework */; };
 		A95240FA2B165D9400F414CE /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95240F92B165D9400F414CE /* ProfileTableHederView.swift */; };
 		A95240FC2B165DC500F414CE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95240FB2B165DC500F414CE /* ProfileViewController.swift */; };
 		A95240FE2B1663CF00F414CE /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95240FD2B1663CF00F414CE /* TabViewController.swift */; };
@@ -27,7 +28,6 @@
 		A9E01DDF2B56F22F0046861E /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9E01DD82B56F22F0046861E /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9E01DE42B56F5160046861E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FBB67D2B20F50F0063A102 /* Post.swift */; };
 		A9FBB6832B21D71F0063A102 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FBB6822B21D71F0063A102 /* PostTableViewCell.swift */; };
-		E3B14702F88DC52AEF214756 /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A102AF65A4E0CECE7A60FC /* Pods_Navigation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,8 +86,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A91D33582B570BB000C6C3E5 /* Pods_Navigation.framework in Frameworks */,
 				A9E01DDE2B56F22F0046861E /* StorageService.framework in Frameworks */,
-				E3B14702F88DC52AEF214756 /* Pods_Navigation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +234,7 @@
 				A9D21DB42B06A42F0016BAAF /* Frameworks */,
 				A9D21DB52B06A42F0016BAAF /* Resources */,
 				A9E01DE02B56F22F0046861E /* Embed Frameworks */,
+				9D88F55259D9D9B68BB97EDD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -320,6 +321,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		9D88F55259D9D9B68BB97EDD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		AFD492237AEC35B3C313F753 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -422,7 +440,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -485,7 +503,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
