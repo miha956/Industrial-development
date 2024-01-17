@@ -7,4 +7,6 @@ target 'Navigation' do
 
   # Pods for Navigation
 
+  pod 'SnapKit'
+  
 end
