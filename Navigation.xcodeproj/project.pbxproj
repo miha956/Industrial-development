@@ -291,6 +291,9 @@
 				Base,
 			);
 			mainGroup = A9D21DAE2B06A42E0016BAAF;
+			packageReferences = (
+				A91D335A2B57213300C6C3E5 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+			);
 			productRefGroup = A9D21DB82B06A42F0016BAAF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -681,6 +684,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A91D335A2B57213300C6C3E5 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:TrueMax/iOSIntPackage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = A9D21DAF2B06A42E0016BAAF /* Project object */;
 }
