@@ -195,35 +195,35 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         let safeAreaLayoutGuide = self.safeAreaLayoutGuide
         
         avatarImageView.snp.makeConstraints { avatarImage in
-            avatarImage.top.equalTo(safeAreaLayoutGuide.snp.top).offset(16)
-            avatarImage.left.equalTo(self.snp.left).offset(16)
-            avatarImage.height.equalTo(100)
-            avatarImage.width.equalTo(100)
-        }
-        fullNameLabel.snp.makeConstraints { fullNameLabel in
-            fullNameLabel.top.equalTo(safeAreaLayoutGuide.snp.top).offset(27)
-            fullNameLabel.left.equalTo(avatarImageView.snp.right).offset(25)
-        }
-        setStatusButton.snp.makeConstraints { setStatusButton in
-            setStatusButton.top.equalTo(avatarImageView.snp.bottom).offset(37)
-            setStatusButton.right.equalTo(self.snp.right).offset(-16)
-            setStatusButton.left.equalTo(self.snp.left).offset(16)
-            setStatusButton.bottom.equalTo(self.snp.bottom).offset(-16)
-            setStatusButton.height.equalTo(50)
-        }
-        statusLabel.snp.makeConstraints { statusLabel in
-            statusLabel.bottom.equalTo(setStatusButton.snp.top).offset(-55)
-            statusLabel.left.equalTo(avatarImageView.snp.right).offset(25)
-        }
-        statusTextField.snp.makeConstraints { statusTextField in
-            statusTextField.top.equalTo(statusLabel.snp.bottom).offset(5)
-            statusTextField.left.equalTo(avatarImageView.snp.right).offset(25)
-            statusTextField.right.equalTo(safeAreaLayoutGuide.snp.right).offset(-16)
-            statusTextField.height.equalTo(40)
-        }
-        closeAvatarButton.snp.makeConstraints { closeAvatarButton in
-            closeAvatarButton.top.equalTo(avatarBackground.snp.top).offset(20)
-            closeAvatarButton.right.equalTo(avatarBackground.snp.right).offset(-20)
+                    avatarImage.top.equalTo(safeAreaLayoutGuide.snp.top).offset(16)
+                    avatarImage.left.equalTo(self.snp.left).offset(16)
+                    avatarImage.height.equalTo(100)
+                    avatarImage.width.equalTo(100)
+                }
+                fullNameLabel.snp.makeConstraints { fullNameLabel in
+                    fullNameLabel.top.equalTo(safeAreaLayoutGuide.snp.top).offset(27)
+                    fullNameLabel.left.equalTo(avatarImageView.snp.right).offset(25)
+                }
+                setStatusButton.snp.makeConstraints { setStatusButton in
+                    setStatusButton.top.equalTo(avatarImageView.snp.bottom).offset(37)
+                    setStatusButton.right.equalTo(self.snp.right).offset(-16)
+                    setStatusButton.left.equalTo(self.snp.left).offset(16)
+                    setStatusButton.bottom.equalTo(self.snp.bottom).offset(-16)
+                    setStatusButton.height.equalTo(50)
+                }
+                statusLabel.snp.makeConstraints { statusLabel in
+                    statusLabel.bottom.equalTo(setStatusButton.snp.top).offset(-55)
+                    statusLabel.left.equalTo(avatarImageView.snp.right).offset(25)
+                }
+                statusTextField.snp.makeConstraints { statusTextField in
+                    statusTextField.top.equalTo(statusLabel.snp.bottom).offset(5)
+                    statusTextField.left.equalTo(avatarImageView.snp.right).offset(25)
+                    statusTextField.right.equalTo(safeAreaLayoutGuide.snp.right).offset(-16)
+                    statusTextField.height.equalTo(40)
+                }
+                closeAvatarButton.snp.makeConstraints { closeAvatarButton in
+                    closeAvatarButton.top.equalTo(avatarBackground.snp.top).offset(20)
+                    closeAvatarButton.right.equalTo(avatarBackground.snp.right).offset(-20)
         }
     }
 }
