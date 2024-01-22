@@ -128,10 +128,15 @@ class LogInViewController: UIViewController {
     }
     
     @objc func logIntapped() {
-        guard let login = loginTextField.text else {return}
-        let currentUser = CurrentUserService(user: User.make())
         
-        if let success = currentUser.checkUser(login: login) {
+        guard let login = loginTextField.text else {return}
+        
+        #if DEBUG
+        let user = TestUserService(user: User.make())
+        #else
+        let user = CurrentUserService(user: User.make())
+        #endif
+        if let success = user.checkUser(login: login) {
             let vc = ProfileViewController(currenyUser: success)
             navigationController?.pushViewController(vc, animated: true)
         } else {

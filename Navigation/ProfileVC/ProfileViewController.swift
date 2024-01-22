@@ -39,13 +39,6 @@ class ProfileViewController: UIViewController {
         addSubviews()
         tuneTableView()
         setupConstraints()
-        
-        #if DEBUG
-        Self.tableView.backgroundColor = .red
-        #else
-        // nothing to do
-        #endif
-        
     }
     
     init(currenyUser: User) {
