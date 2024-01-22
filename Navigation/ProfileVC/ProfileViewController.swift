@@ -9,11 +9,11 @@ import UIKit
 import StorageService
 
 class ProfileViewController: UIViewController {
-    
+        
     // MARK: - Data
     
     fileprivate let data = Post.make()
-    fileprivate let userData = User.make()
+    fileprivate var currenyUser: User
     
     // MARK: - Subviews
     
@@ -46,6 +46,15 @@ class ProfileViewController: UIViewController {
         // nothing to do
         #endif
         
+    }
+    
+    init(currenyUser: User) {
+        self.currenyUser = currenyUser
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Actions
@@ -109,6 +118,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         if section == 0 {
+            headerView.update(user: currenyUser)
             return headerView
         } else {
             return nil
@@ -142,7 +152,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 fatalError("could not dequeueReusableCell")
         }
         postCell.update(data[indexPath.row])
-        photosCell.updateData(photos: userData.photos)
+        photosCell.updateData(photos: currenyUser.photos)
         
         switch indexPath.section {
         case 0:

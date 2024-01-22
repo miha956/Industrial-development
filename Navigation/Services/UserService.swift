@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol UserService {
+    
+    func checkUser(login: String) -> User?
+    
+}

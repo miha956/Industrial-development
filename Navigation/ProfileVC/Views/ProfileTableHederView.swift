@@ -33,7 +33,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         avatarImageView.isUserInteractionEnabled = true
         return avatarImageView
     }()
-    let fullNameLabel: UILabel = {
+    let nameLabel: UILabel = {
         let fullNameLabel = UILabel()
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
         fullNameLabel.text = "Hipster Cat"
@@ -180,7 +180,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     // MARK: - Private
     
     private func addSubviews() {
-        self.addSubview(fullNameLabel)
+        self.addSubview(nameLabel)
         self.addSubview(statusLabel)
         self.addSubview(setStatusButton)
         self.addSubview(statusTextField)
@@ -199,8 +199,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             avatarImageView.heightAnchor.constraint(equalToConstant: 100),
             avatarImageView.widthAnchor.constraint(equalToConstant: 100),
         
-            fullNameLabel.topAnchor.constraint(equalTo:self.safeAreaLayoutGuide.topAnchor,constant: 27),
-            fullNameLabel.leadingAnchor.constraint(equalTo:avatarImageView.trailingAnchor,constant: 25),
+            nameLabel.topAnchor.constraint(equalTo:self.safeAreaLayoutGuide.topAnchor,constant: 27),
+            nameLabel.leadingAnchor.constraint(equalTo:avatarImageView.trailingAnchor,constant: 25),
             setStatusButton.topAnchor.constraint(equalTo:avatarImageView.bottomAnchor,constant: 37),
             setStatusButton.trailingAnchor.constraint(equalTo:self.trailingAnchor,constant: -16),
             setStatusButton.leadingAnchor.constraint(equalTo:self.leadingAnchor,constant: 16),
@@ -220,4 +220,13 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             
         ])
     }
+    
+    // MARK: - Public
+    
+    func update( user: User) {
+        avatarImageView.image = user.avatarImage
+        nameLabel.text = user.name
+        statusLabel.text = user.status
+    }
+    
 }

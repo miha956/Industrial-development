@@ -9,6 +9,7 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    // MARK: - SubViews
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -127,8 +128,15 @@ class LogInViewController: UIViewController {
     }
     
     @objc func logIntapped() {
-        let vc = ProfileViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        guard let login = loginTextField.text else {return}
+        let currentUser = CurrentUserService(user: User.make())
+        
+        if let success = currentUser.checkUser(login: login) {
+            let vc = ProfileViewController(currenyUser: success)
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            print("wrong user")
+        }
     }
 
 
