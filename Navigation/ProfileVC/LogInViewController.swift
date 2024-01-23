@@ -9,6 +9,10 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    // MARK: - Properties
+    
+    var loginDelegate: LoginViewControllerDelegate?
+    
     // MARK: - SubViews
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
