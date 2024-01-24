@@ -7,10 +7,17 @@
 
 import Foundation
 
-struct LoginInspector: LoginViewControllerDelegate {
-    func check(checker: Checker) {
-        <#code#>
+struct LoginInspector: LoginViewControllerDelegate, UserService {
+    
+    
+    let checker = Checker.shared
+    let user = User.make()
+    
+    func check(login: String, password: String) -> Bool {
+        checker.check(login: login, password: password)
     }
     
-    
+    func checkUser(login: String) -> User? {
+        user.login == login ? user : nil
+    }
 }

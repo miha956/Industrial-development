@@ -7,18 +7,18 @@
 
 import Foundation
 
-final class CurrentUserService: UserService {
-    
-    private let user: User
-    
-    func checkUser(login: String) -> User? {
-        if user.name == login {
-            return user
-        }
-        return nil
-    }
-    
-    init(user: User) {
-        self.user = user
-    }
-}
+//final class CurrentUserService: UserService {
+//    
+//    private let user: User
+//    
+//    func checkUser(login: String) -> User? {
+//        if user.name == login {
+//            return user
+//        }
+//        return nil
+//    }
+//    
+//    init(user: User) {
+//        self.user = user
+//    }
+//}

@@ -101,6 +101,7 @@ class LogInViewController: UIViewController {
         setupView()
         addSubviews()
         setupConstraints()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,18 +135,29 @@ class LogInViewController: UIViewController {
     @objc func logIntapped() {
         
         guard let login = loginTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        guard let loginDelegate = self.loginDelegate as? LoginInspector else {return}
         
-        #if DEBUG
-        let user = TestUserService(user: User.make())
-        #else
-        let user = CurrentUserService(user: User.make())
-        #endif
-        if let success = user.checkUser(login: login) {
-            let vc = ProfileViewController(currenyUser: success)
-            navigationController?.pushViewController(vc, animated: true)
+        if loginDelegate.check(login: login, password: password) {
+            if let user = loginDelegate.checkUser(login: login) {
+                let vc = ProfileViewController(currenyUser: user)
+                navigationController?.pushViewController(vc, animated: true)
+            }
         } else {
-            print("wrong user")
+            showAlert(title: "Login or password is wrong", message: "Please, try again", target: self, handler: nil)
         }
+        
+//        #if DEBUG
+//        let user = TestUserService(user: User.make())
+//        #else
+//        let user = CurrentUserService(user: User.make())
+//        #endif
+//        if let success = user.checkUser(login: login) {
+//            let vc = ProfileViewController(currenyUser: success)
+//            navigationController?.pushViewController(vc, animated: true)
+//        } else {
+//            print("wrong user")
+//        }
     }
 
 

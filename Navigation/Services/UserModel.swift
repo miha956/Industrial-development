@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 public struct User {
+    let login: String?
     let name: String
     let status: String?
     let avatarImage: UIImage?
@@ -18,7 +19,7 @@ public struct User {
 extension User {
     
     static func make() -> User {
-        User(name: "Cat",
+        User(login: "misha", name: "Cat",
              status: "I AM SUPER CAT",
              avatarImage: UIImage(named: "cat"),
              photos: (1...20).map { UIImage(named: "\($0)")})
