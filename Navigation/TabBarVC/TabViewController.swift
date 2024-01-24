@@ -18,7 +18,9 @@ class TabViewController: UITabBarController {
     private func setTabBar() {
         
         let loginVC = LogInViewController()
-        loginVC.loginDelegate = LoginInspector()
+        //loginVC.loginDelegate = LoginInspector()
+        let factory = MyLoginFactory()
+        loginVC.loginDelegate = factory.makeLoginInspector()
         
         let navigationController = UINavigationController(rootViewController: FeedViewController())
         let navigationController2 = UINavigationController(rootViewController: loginVC)
