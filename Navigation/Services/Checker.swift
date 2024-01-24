@@ -13,8 +13,8 @@ final class Checker {
 
     // MARK: - Properties
     
-    private let login: String = "misha"
-    private let password: String = "123123"
+     private let login: String = "misha"
+     private let password: String = "123123"
     
     // MARK: - Lifecycle
     private init() {}
