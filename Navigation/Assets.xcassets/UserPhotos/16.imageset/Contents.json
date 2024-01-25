@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "how-i-met-your-mother-season-8-episode-22-frame-3.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "how-i-met-your-mother-season-8-episode-22-frame-3 1.jpg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "how-i-met-your-mother-season-8-episode-22-frame-3 2.jpg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
