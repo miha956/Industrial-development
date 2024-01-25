@@ -13,7 +13,7 @@ public struct User {
     let name: String
     let status: String?
     let avatarImage: UIImage?
-    let photos: [UIImage?]
+    let photos: [UIImage]
 }
 
 extension User {
@@ -22,6 +22,6 @@ extension User {
         User(login: "misha", name: "Cat",
              status: "I AM SUPER CAT",
              avatarImage: UIImage(named: "cat"),
-             photos: (1...20).map { UIImage(named: "\($0)")})
+             photos: (1...20).map { UIImage(named: "\($0)")!})
     }
 }

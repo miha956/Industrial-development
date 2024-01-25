@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
+    
+    // MARK: - Properties
     
     private enum Constants {
         static let photoSpacing: CGFloat = 8
     }
+    let facade = ImagePublisherFacade()
     
     // MARK: -  Data
     
@@ -42,6 +46,8 @@ class PhotosViewController: UIViewController {
         addSubviews()
         setupConstraints()
         collectionView()
+        
+        facade.subscribe(self)
     }
     
     // MARK: - Private
@@ -91,8 +97,12 @@ extension PhotosViewController: UICollectionViewDataSource {
         
         return photosCell
     }
+}
+
+extension PhotosViewController: ImageLibrarySubscriber {
     
-    
-    
-    
+    func receive(images: [UIImage]) {
+        facade.addImagesWithTimer(time: 1, repeat: 10, userImages: userData.photos)
+    }
+   
 }
