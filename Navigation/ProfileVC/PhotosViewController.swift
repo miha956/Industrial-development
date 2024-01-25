@@ -6,16 +6,21 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
+    
+    // MARK: - Properties
     
     private enum Constants {
         static let photoSpacing: CGFloat = 8
     }
+    let facade = ImagePublisherFacade()
     
     // MARK: -  Data
     
     fileprivate let userData = User.make()
+    private var userPhotos: [UIImage] = []
     
     // MARK: - SubViews
     
@@ -35,6 +40,7 @@ class PhotosViewController: UIViewController {
     
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +48,12 @@ class PhotosViewController: UIViewController {
         addSubviews()
         setupConstraints()
         collectionView()
+        facade.subscribe(self)
+        facade.addImagesWithTimer(time: 1, repeat: 20, userImages: userData.photos)
+    }
+    
+    deinit {
+        facade.removeSubscription(for: self)
     }
     
     // MARK: - Private
@@ -76,7 +88,7 @@ class PhotosViewController: UIViewController {
 extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        userData.photos.count
+        userPhotos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -87,12 +99,17 @@ extension PhotosViewController: UICollectionViewDataSource {
             fatalError("could not dequeueReusableCell")
         }
         
-        photosCell.setupData(image: userData.photos[indexPath.row])
+        photosCell.setupData(image: userPhotos[indexPath.row])
         
         return photosCell
     }
+}
+
+extension PhotosViewController: ImageLibrarySubscriber {
     
-    
-    
-    
+    func receive(images: [UIImage]) {
+        userPhotos = images
+        photosCollectionView.reloadData()
+        print("image added")
+    }
 }

@@ -49,6 +49,7 @@ class LogInViewController: UIViewController {
         loginTextField.layer.masksToBounds = true
         loginTextField.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         loginTextField.layer.borderColor = UIColor.lightGray.cgColor
+        loginTextField.text = "misha"
         
         return loginTextField
     }()
@@ -67,6 +68,7 @@ class LogInViewController: UIViewController {
         passwordTextField.layer.masksToBounds = true
         passwordTextField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
+        passwordTextField.text = "123123"
         return passwordTextField
     }()
     private lazy var logInStackview: UIStackView = {
