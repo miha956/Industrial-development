@@ -11,11 +11,15 @@ import UIKit
 class Service {
     
     private var users = [
-        User(login: "misha", password: "12345", name: "Cat",
+        User(login: "misha", password: "123123", name: "Cat",
              status: "I AM SUPER CAT",
              avatarImage: UIImage(named: "cat"),
              photos: (1...20).map { UIImage(named: "\($0)")!}),
         User(login: "murmur", password: "12345", name: "Cat",
+             status: "I AM SUPER CAT",
+             avatarImage: UIImage(named: "cat"),
+             photos: (1...20).map { UIImage(named: "\($0)")!}),
+        User(login: "cat", password: "321", name: "Cat",
              status: "I AM SUPER CAT",
              avatarImage: UIImage(named: "cat"),
              photos: (1...20).map { UIImage(named: "\($0)")!})
@@ -26,12 +30,15 @@ class Service {
         DispatchQueue.global().asyncAfter(deadline: .now() + 1, execute: { [weak self] in
             guard let self else { return}
             // Главное
+            var i = users.count
             for user in users {
                 if user.login == login && user.password == password {
                     completion(.success(user))
                     break
-                } else {
+                } else if i == 0 {
                     completion(.failure(CustomError.noUser))
+                } else  {
+                    i -= 1
                 }
             }
         })
