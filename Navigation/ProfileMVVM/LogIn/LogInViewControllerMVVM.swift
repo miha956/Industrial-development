@@ -101,6 +101,7 @@ class LogInViewControllerMVVM: UIViewController {
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
         indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.tintColor = .darkGray
         return indicator
     }()
     
@@ -120,6 +121,7 @@ class LogInViewControllerMVVM: UIViewController {
         setupView()
         addSubviews()
         setupConstraints()
+        bindViewModel()
     }
     
 // MARK: Actions
@@ -151,6 +153,13 @@ class LogInViewControllerMVVM: UIViewController {
                     }
                 case .error:
                     print("error")
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    activityIndicator.isHidden = true
+                    activityIndicator.stopAnimating()
+                    contentView.isHidden = false
+                    showAlert(title: "Login or password is wrong", message: "Please, try again", target: self, handler: nil)
+                }
             }
         }
     }
@@ -170,7 +179,7 @@ class LogInViewControllerMVVM: UIViewController {
         logInStackview.addArrangedSubview(passwordTextField)
         contentView.addSubview(logInStackview)
         contentView.addSubview(logInButton)
-        contentView.addSubview(activityIndicator)
+        view.addSubview(activityIndicator)
     }
     private func setupConstraints() {
         let safeAreaLayoutGuide = view.safeAreaLayoutGuide
@@ -207,8 +216,8 @@ class LogInViewControllerMVVM: UIViewController {
             logInButton.heightAnchor.constraint(equalToConstant: 50),
             logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
             
-            activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
             
         ])
         

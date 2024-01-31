@@ -22,17 +22,19 @@ class Service {
         ]
     
     func fetchUser(login: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {
-        // Имитирует запрос данных из сети (делая паузу в 3 секунды)
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: { [weak self] in
+        // Имитирует запрос данных из сети (делая паузу в 1 секунду)
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1, execute: { [weak self] in
             guard let self else { return}
             // Главное
             for user in users {
                 if user.login == login && user.password == password {
                     completion(.success(user))
+                    break
+                } else {
+                    completion(.failure(CustomError.noUser))
                 }
             }
         })
-                    completion(.failure(CustomError.noUser))
     }
         
 }

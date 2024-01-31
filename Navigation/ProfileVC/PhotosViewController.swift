@@ -19,7 +19,7 @@ class PhotosViewController: UIViewController {
     
     // MARK: -  Data
     
-    fileprivate let userData = User.make()
+    private let userData = User.make()
     private var userPhotos: [UIImage] = []
     
     // MARK: - SubViews

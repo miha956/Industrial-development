@@ -136,18 +136,18 @@ class LogInViewController: UIViewController {
     
     @objc func logIntapped() {
         
-        guard let login = loginTextField.text else {return}
-        guard let password = passwordTextField.text else {return}
-        guard let loginDelegate = self.loginDelegate as? LoginInspector else {return}
-        
-        if loginDelegate.check(login: login, password: password) {
-            if let user = loginDelegate.checkUser(login: login) {
-                let vc = ProfileViewController(currenyUser: user)
-                navigationController?.pushViewController(vc, animated: true)
-            }
-        } else {
-            showAlert(title: "Login or password is wrong", message: "Please, try again", target: self, handler: nil)
-        }
+//        guard let login = loginTextField.text else {return}
+//        guard let password = passwordTextField.text else {return}
+//        //guard let loginDelegate = self.loginDelegate as? LoginInspector else {return}
+//        
+//        if loginDelegate.check(login: login, password: password) {
+//            if let user = loginDelegate.checkUser(login: login) {
+//                let vc = ProfileViewController(currenyUser: user)
+//                navigationController?.pushViewController(vc, animated: true)
+//            }
+//        } else {
+//            showAlert(title: "Login or password is wrong", message: "Please, try again", target: self, handler: nil)
+//        }
     }
 
 

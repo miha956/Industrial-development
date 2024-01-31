@@ -12,7 +12,7 @@
 		A95240FC2B165DC500F414CE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95240FB2B165DC500F414CE /* ProfileViewController.swift */; };
 		A95240FE2B1663CF00F414CE /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95240FD2B1663CF00F414CE /* TabViewController.swift */; };
 		A95241002B1E64BC00F414CE /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95240FF2B1E64BC00F414CE /* LogInViewController.swift */; };
-		A98C4F822B6AC2B50011F2B8 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98C4F812B6AC2B50011F2B8 /* LogInViewController.swift */; };
+		A98C4F822B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98C4F812B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift */; };
 		A98C4F842B6AC68C0011F2B8 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98C4F832B6AC68C0011F2B8 /* LogInViewModel.swift */; };
 		A98C4F872B6ACC440011F2B8 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98C4F862B6ACC440011F2B8 /* Service.swift */; };
 		A98C4F892B6AD5A60011F2B8 /* LoginVMOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98C4F882B6AD5A60011F2B8 /* LoginVMOutput.swift */; };
@@ -75,7 +75,7 @@
 		A95240FB2B165DC500F414CE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A95240FD2B1663CF00F414CE /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		A95240FF2B1E64BC00F414CE /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
-		A98C4F812B6AC2B50011F2B8 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		A98C4F812B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewControllerMVVM.swift; sourceTree = "<group>"; };
 		A98C4F832B6AC68C0011F2B8 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
 		A98C4F862B6ACC440011F2B8 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		A98C4F882B6AD5A60011F2B8 /* LoginVMOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVMOutput.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 		A98C4F7F2B6AC1BC0011F2B8 /* LogIn */ = {
 			isa = PBXGroup;
 			children = (
-				A98C4F812B6AC2B50011F2B8 /* LogInViewController.swift */,
+				A98C4F812B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift */,
 				A98C4F832B6AC68C0011F2B8 /* LogInViewModel.swift */,
 				A98C4F882B6AD5A60011F2B8 /* LoginVMOutput.swift */,
 			);
@@ -414,7 +414,7 @@
 				A9D21DD52B06B2B10016BAAF /* PostViewController.swift in Sources */,
 				A991AD9C2B60538C0067D1A5 /* AlertController.swift in Sources */,
 				A95241002B1E64BC00F414CE /* LogInViewController.swift in Sources */,
-				A98C4F822B6AC2B50011F2B8 /* LogInViewController.swift in Sources */,
+				A98C4F822B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift in Sources */,
 				A9D85F892B29054E0008B461 /* UserModel.swift in Sources */,
 				A9C4060D2B586F3300C5A171 /* CurrentUserService.swift in Sources */,
 				A98C4F872B6ACC440011F2B8 /* Service.swift in Sources */,
