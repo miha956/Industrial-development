@@ -32,13 +32,12 @@ class Service {
             // Главное
             var i = 0
             for user in users {
+                i += 1
                 if user.login == login && user.password == password {
                     completion(.success(user))
                     break
-                } else if i == users.count - 1 {
+                } else if i == users.count {
                     completion(.failure(CustomError.noUser))
-                } else {
-                    i += 1
                 }
             }
         })
