@@ -2,18 +2,20 @@
 //  LogInViewController.swift
 //  Navigation
 //
-//  Created by Миша Вашкевич on 04.12.2023.
+//  Created by Миша Вашкевич on 31.01.2024.
 //
 
 import UIKit
 
-class LogInViewController: UIViewController {
+class LogInViewControllerMVVM: UIViewController {
     
-    // MARK: - Properties
+// MARK: - Properties
     
-    var loginDelegate: LoginViewControllerDelegate?
+    private var viewModel: LoginVMOutput
+    private var user: User? = nil
     
-    // MARK: - SubViews
+// MARK: - SubViews
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -50,6 +52,7 @@ class LogInViewController: UIViewController {
         loginTextField.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         loginTextField.layer.borderColor = UIColor.lightGray.cgColor
         loginTextField.text = "misha"
+        loginTextField.delegate = self
         
         return loginTextField
     }()
@@ -69,6 +72,7 @@ class LogInViewController: UIViewController {
         passwordTextField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
         passwordTextField.text = "123123"
+        passwordTextField.delegate = self
         return passwordTextField
     }()
     private lazy var logInStackview: UIStackView = {
@@ -79,6 +83,7 @@ class LogInViewController: UIViewController {
         logInStackview.layer.cornerRadius = 10
         logInStackview.backgroundColor = .systemGray6
         logInStackview.alignment = .fill
+        
 
         return logInStackview
     }()
@@ -90,74 +95,80 @@ class LogInViewController: UIViewController {
         logInButton.translatesAutoresizingMaskIntoConstraints = false
         logInButton.setTitle("Log In", for: .normal)
         logInButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        logInButton.addTarget(nil, action: #selector(logIntapped), for: .touchUpInside)
-
+        logInButton.addTarget(self, action: #selector(tapLogIn), for: .touchUpInside)
         return logInButton
     }()
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.tintColor = .darkGray
+        return indicator
+    }()
     
-    // MARK: - Lifecycle
+// MARK: - Lifecycle
+    
+    init(viewModel: LoginVMOutput) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
         addSubviews()
         setupConstraints()
-        
+        bindViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+// MARK: Actions
         
-        setupKeyboardObservers()
+    @objc private func tapLogIn() {
+        viewModel.changeState(login: loginTextField.text!, password: passwordTextField.text!)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        removeKeyboardObservers()
+    private func bindViewModel() {
+        viewModel.currentState = { [weak self] state in
+            guard let self else { return }
+            
+            switch state {
+                case .initial:
+                    print("initial")
+                case .loading:
+                    activityIndicator.isHidden = false
+                    contentView.isHidden = true
+                    activityIndicator.startAnimating()
+                case .logined(let user):
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self else { return }
+                        self.user = user
+                        activityIndicator.isHidden = true
+                        activityIndicator.stopAnimating()
+                        contentView.isHidden = false
+                        let vc = ProfileViewController(currenyUser: user)
+                        navigationController?.pushViewController(vc, animated: true)
+                    }
+                case .error:
+                    print("error")
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    activityIndicator.isHidden = true
+                    activityIndicator.stopAnimating()
+                    contentView.isHidden = false
+                    showAlert(title: "Login or password is wrong", message: "Please, try again", target: self, handler: nil)
+                }
+            }
+        }
     }
     
-    // MARK: - Actions
-    
-    @objc func willShowKeyboard(_ notification: NSNotification) {
-        
-            let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
-            guard let height = keyboardHeight else { print("get keyboardHeight error"); return }
-            scrollView.contentInset.bottom = height + 50
-            print("height \(height)")
-            print(scrollView.contentInset.bottom)
-        
-    }
-    
-    @objc func willHideKeyboard(_ notification: NSNotification) {
-        scrollView.contentInset.bottom = 0.0
-    }
-    
-    @objc func logIntapped() {
-        
-//        guard let login = loginTextField.text else {return}
-//        guard let password = passwordTextField.text else {return}
-//        //guard let loginDelegate = self.loginDelegate as? LoginInspector else {return}
-//        
-//        if loginDelegate.check(login: login, password: password) {
-//            if let user = loginDelegate.checkUser(login: login) {
-//                let vc = ProfileViewController(currenyUser: user)
-//                navigationController?.pushViewController(vc, animated: true)
-//            }
-//        } else {
-//            showAlert(title: "Login or password is wrong", message: "Please, try again", target: self, handler: nil)
-//        }
-    }
-
-
-    // MARK: - private
+// MARK: UI Setup
     
     private func setupView() {
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
-        loginTextField.delegate = self
-        passwordTextField.delegate = self
         
     }
     private func addSubviews() {
@@ -168,8 +179,7 @@ class LogInViewController: UIViewController {
         logInStackview.addArrangedSubview(passwordTextField)
         contentView.addSubview(logInStackview)
         contentView.addSubview(logInButton)
-        
-        setupKeyboardObservers()
+        view.addSubview(activityIndicator)
     }
     private func setupConstraints() {
         let safeAreaLayoutGuide = view.safeAreaLayoutGuide
@@ -204,7 +214,10 @@ class LogInViewController: UIViewController {
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0)
+            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
             
         ])
         
@@ -216,31 +229,11 @@ class LogInViewController: UIViewController {
         }
         
     }
-    private func setupKeyboardObservers() {
-            let notificationCenter = NotificationCenter.default
-            
-            notificationCenter.addObserver(
-                self,
-                selector: #selector(self.willShowKeyboard(_:)),
-                name: UIResponder.keyboardDidShowNotification,
-                object: nil
-            )
-            
-            notificationCenter.addObserver(
-                self,
-                selector: #selector(self.willHideKeyboard(_:)),
-                name: UIResponder.keyboardWillHideNotification,
-                object: nil
-            )
-        }
-        
-        private func removeKeyboardObservers() {
-            let notificationCenter = NotificationCenter.default
-            notificationCenter.removeObserver(self)
-        }
 }
 
-extension LogInViewController: UITextFieldDelegate {
+// MARK: UITextFieldDelegate
+
+extension LogInViewControllerMVVM: UITextFieldDelegate {
     
     func textFieldShouldReturn(
         _ textField: UITextField

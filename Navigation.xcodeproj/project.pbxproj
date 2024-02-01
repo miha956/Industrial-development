@@ -12,6 +12,10 @@
 		A95240FC2B165DC500F414CE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95240FB2B165DC500F414CE /* ProfileViewController.swift */; };
 		A95240FE2B1663CF00F414CE /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95240FD2B1663CF00F414CE /* TabViewController.swift */; };
 		A95241002B1E64BC00F414CE /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95240FF2B1E64BC00F414CE /* LogInViewController.swift */; };
+		A98C4F822B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98C4F812B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift */; };
+		A98C4F842B6AC68C0011F2B8 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98C4F832B6AC68C0011F2B8 /* LogInViewModel.swift */; };
+		A98C4F872B6ACC440011F2B8 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98C4F862B6ACC440011F2B8 /* Service.swift */; };
+		A98C4F892B6AD5A60011F2B8 /* LoginVMOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98C4F882B6AD5A60011F2B8 /* LoginVMOutput.swift */; };
 		A991AD952B6034CA0067D1A5 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A991AD942B6034CA0067D1A5 /* Checker.swift */; };
 		A991AD972B6038EC0067D1A5 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A991AD962B6038EC0067D1A5 /* LoginViewControllerDelegate.swift */; };
 		A991AD992B603CAE0067D1A5 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A991AD982B603CAE0067D1A5 /* LoginInspector.swift */; };
@@ -71,6 +75,10 @@
 		A95240FB2B165DC500F414CE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A95240FD2B1663CF00F414CE /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		A95240FF2B1E64BC00F414CE /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		A98C4F812B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewControllerMVVM.swift; sourceTree = "<group>"; };
+		A98C4F832B6AC68C0011F2B8 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
+		A98C4F862B6ACC440011F2B8 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		A98C4F882B6AD5A60011F2B8 /* LoginVMOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVMOutput.swift; sourceTree = "<group>"; };
 		A991AD942B6034CA0067D1A5 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		A991AD962B6038EC0067D1A5 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		A991AD982B603CAE0067D1A5 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
@@ -139,6 +147,42 @@
 			path = ProfileVC;
 			sourceTree = "<group>";
 		};
+		A98C4F7E2B6AC0B40011F2B8 /* ProfileMVVM */ = {
+			isa = PBXGroup;
+			children = (
+				A98C4F852B6AC9F50011F2B8 /* Models */,
+				A98C4F7F2B6AC1BC0011F2B8 /* LogIn */,
+				A98C4F802B6AC20B0011F2B8 /* Profile */,
+			);
+			path = ProfileMVVM;
+			sourceTree = "<group>";
+		};
+		A98C4F7F2B6AC1BC0011F2B8 /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				A98C4F812B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift */,
+				A98C4F832B6AC68C0011F2B8 /* LogInViewModel.swift */,
+				A98C4F882B6AD5A60011F2B8 /* LoginVMOutput.swift */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
+		A98C4F802B6AC20B0011F2B8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		A98C4F852B6AC9F50011F2B8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A9D85F882B29054E0008B461 /* UserModel.swift */,
+				A98C4F862B6ACC440011F2B8 /* Service.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		A991AD9A2B6053580067D1A5 /* Lybrary */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +228,7 @@
 				A9FBB67C2B20F24F0063A102 /* Services */,
 				A9FBB67B2B20F2100063A102 /* TabBarVC */,
 				A9FBB67A2B20F1FD0063A102 /* FeedVC */,
+				A98C4F7E2B6AC0B40011F2B8 /* ProfileMVVM */,
 				A95240F82B165D6D00F414CE /* ProfileVC */,
 				A9D21DD22B06AC960016BAAF /* LaunchScreen.storyboard */,
 				A9D21DC32B06A4310016BAAF /* Assets.xcassets */,
@@ -222,7 +267,6 @@
 		A9FBB67C2B20F24F0063A102 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				A9D85F882B29054E0008B461 /* UserModel.swift */,
 				A9D7FF242B642C22005C1509 /* FeedModel.swift */,
 				A9C4060A2B586B4200C5A171 /* UserService.swift */,
 				A9C4060C2B586F3300C5A171 /* CurrentUserService.swift */,
@@ -370,14 +414,18 @@
 				A9D21DD52B06B2B10016BAAF /* PostViewController.swift in Sources */,
 				A991AD9C2B60538C0067D1A5 /* AlertController.swift in Sources */,
 				A95241002B1E64BC00F414CE /* LogInViewController.swift in Sources */,
+				A98C4F822B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift in Sources */,
 				A9D85F892B29054E0008B461 /* UserModel.swift in Sources */,
 				A9C4060D2B586F3300C5A171 /* CurrentUserService.swift in Sources */,
+				A98C4F872B6ACC440011F2B8 /* Service.swift in Sources */,
 				A991AD992B603CAE0067D1A5 /* LoginInspector.swift in Sources */,
 				A991AD952B6034CA0067D1A5 /* Checker.swift in Sources */,
 				A9D21DBB2B06A42F0016BAAF /* AppDelegate.swift in Sources */,
 				A9D21DD72B06B9B70016BAAF /* InfoViewController.swift in Sources */,
+				A98C4F842B6AC68C0011F2B8 /* LogInViewModel.swift in Sources */,
 				A991AD972B6038EC0067D1A5 /* LoginViewControllerDelegate.swift in Sources */,
 				A9D85F8D2B2B0C540008B461 /* PhotosViewController.swift in Sources */,
+				A98C4F892B6AD5A60011F2B8 /* LoginVMOutput.swift in Sources */,
 				A99FE9302B618E2F003844DE /* LoginFactory.swift in Sources */,
 				A9D21DCF2B06AB480016BAAF /* FeedViewController.swift in Sources */,
 				A95240FC2B165DC500F414CE /* ProfileViewController.swift in Sources */,
