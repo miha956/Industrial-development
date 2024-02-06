@@ -152,7 +152,6 @@ class LogInViewControllerMVVM: UIViewController {
                         navigationController?.pushViewController(vc, animated: true)
                     }
                 case .error:
-                    print("error")
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
                     activityIndicator.isHidden = true
