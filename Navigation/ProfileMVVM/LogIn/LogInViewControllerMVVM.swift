@@ -148,8 +148,7 @@ class LogInViewControllerMVVM: UIViewController {
                         activityIndicator.isHidden = true
                         activityIndicator.stopAnimating()
                         contentView.isHidden = false
-                        let vc = ProfileViewController(currenyUser: user)
-                        navigationController?.pushViewController(vc, animated: true)
+                        viewModel.coordinator?.logInUser()
                     }
                 case .error:
                 DispatchQueue.main.async { [weak self] in

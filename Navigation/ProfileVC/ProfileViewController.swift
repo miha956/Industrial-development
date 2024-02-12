@@ -9,6 +9,8 @@ import UIKit
 import StorageService
 
 class ProfileViewController: UIViewController {
+    
+    var coordinator: UserProfileScreenCoordinatorProtocol?
         
     // MARK: - Data
     
@@ -41,8 +43,9 @@ class ProfileViewController: UIViewController {
         setupConstraints()
     }
     
-    init(currenyUser: User) {
+    init(currenyUser: User, coordinator: UserProfileScreenCoordinatorProtocol) {
         self.currenyUser = currenyUser
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -159,8 +162,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            let vc = PhotosViewController()
-            navigationController?.pushViewController(vc, animated: true)
+            coordinator?.showUserPhoto()
+            print("show user photo")
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

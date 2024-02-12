@@ -6,3 +6,16 @@
 //
 
 import Foundation
+import UIKit
+
+final class FeedCoordinator: FeedScreenCoordinatorProtocol {
+    
+    var rootViewController: UIViewController = UIViewController()
+    
+    func start() -> UIViewController {
+        rootViewController = UINavigationController(rootViewController: FeedViewController())
+        return rootViewController
+    }
+    
+    
+}

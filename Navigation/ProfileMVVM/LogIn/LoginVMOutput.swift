@@ -10,6 +10,7 @@ import Foundation
 protocol LoginVMOutput {
     var state: State { get set }
     var currentState: ((State) -> Void)? { get set }
+    var coordinator: LogInScreenCoordinatorProtocol? {get}
     func changeState(login: String, password: String)
 }
 

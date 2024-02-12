@@ -11,42 +11,42 @@ class TabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTabBar()
-        setTabBarAppearance()
+        //setTabBar()
+       setTabBarAppearance()
     }
     
-    private func setTabBar() {
-        let service = Service()
-        let modelView = LogInViewModel(service: service)
-        let loginVC = LogInViewControllerMVVM(viewModel: modelView)
-        
-        let navigationController = UINavigationController(rootViewController: FeedViewController())
-        let navigationController2 = UINavigationController(rootViewController: loginVC)
-        
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.shadowColor = UIColor(red: 60/255, green: 60/255, blue: 0/255, alpha: 0.29)
-        navBarAppearance.backgroundColor = UIColor.white.withAlphaComponent(1)
-        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
-        navigationController2.navigationBar.scrollEdgeAppearance = navBarAppearance
+//    private func setTabBar() {
+//        let service = Service()
+//        let modelView = LogInViewModel(service: service)
+//        let loginVC = LogInViewControllerMVVM(viewModel: modelView)
+//        
+//        let navigationController = UINavigationController(rootViewController: FeedViewController())
+//        let navigationController2 = UINavigationController(rootViewController: loginVC)
+//        
+//        let navBarAppearance = UINavigationBarAppearance()
+//        navBarAppearance.shadowColor = UIColor(red: 60/255, green: 60/255, blue: 0/255, alpha: 0.29)
+//        navBarAppearance.backgroundColor = UIColor.white.withAlphaComponent(1)
+//        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
+//        navigationController2.navigationBar.scrollEdgeAppearance = navBarAppearance
 
         
-        self.viewControllers = [
-            setVC(
-                viewController: navigationController,
-                title: "Привычки",
-                image: UIImage(systemName: "house.fill")),
-            setVC(
-                viewController: navigationController2,
-                title: "Profile",
-                image: UIImage(systemName: "person.fill"))
-        ]
-    }
-    
-    private func setVC(viewController: UIViewController, title: String, image: UIImage?) -> UIViewController {
-        viewController.tabBarItem.title = title
-        viewController.tabBarItem.image = image
-        return viewController
-    }
+//        self.viewControllers = [
+//            setVC(
+//                viewController: navigationController,
+//                title: "Feed",
+//                image: UIImage(systemName: "house.fill")),
+//            setVC(
+//                viewController: navigationController2,
+//                title: "Profile",
+//                image: UIImage(systemName: "person.fill"))
+//        ]
+//    }
+//    
+//    private func setVC(viewController: UIViewController, title: String, image: UIImage?) -> UIViewController {
+//        viewController.tabBarItem.title = title
+//        viewController.tabBarItem.image = image
+//        return viewController
+//    }
     
     
     private func setTabBarAppearance() {

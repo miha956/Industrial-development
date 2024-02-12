@@ -7,27 +7,26 @@
 
 import UIKit
 
-final class AppCoordinator {
+final class AppCoordinator: Coordinator {
     
     // MARK: - Properties
-    var childCoordinators: [Coordinator] = []
     
-    private(set) var rootViewController: UIViewController = TabViewController() {
-        didSet {
-            UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
-                self.window.rootViewController = self.rootViewController
-            })
-        }
-    }
+    private var window: UIWindow
     
-    let window: UIWindow
+    var rootViewController: UIViewController = UIViewController()
     
     // MARK: - Init
     public init(window: UIWindow) {
         self.window = window
-        self.window.backgroundColor = .white
-        self.window.rootViewController = rootViewController
+        self.window.rootViewController = start()
         self.window.makeKeyAndVisible()
-        
+    }
+    
+    // MARK: - Functions
+    
+    func start() -> UIViewController {
+        let mainCoordinator = MainCoordinator()
+        rootViewController = mainCoordinator.start()
+        return rootViewController
     }
 }

@@ -9,6 +9,8 @@ import Foundation
 
 final class LogInViewModel: LoginVMOutput {
     
+    var coordinator: LogInScreenCoordinatorProtocol?
+    
     private let service: Service
     var state: State = .initial {
         didSet {
@@ -32,8 +34,9 @@ final class LogInViewModel: LoginVMOutput {
         }
     }
     
-    init(service: Service) {
+    init(service: Service, coordinator: LogInScreenCoordinatorProtocol) {
         self.service = service
+        self.coordinator = coordinator
     }
     
 }

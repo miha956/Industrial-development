@@ -24,6 +24,12 @@
 		A99FE9332B618E75003844DE /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99FE9322B618E75003844DE /* MyLoginFactory.swift */; };
 		A9B27D572B717E3A000EFC62 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B27D562B717E3A000EFC62 /* AppCoordinator.swift */; };
 		A9B27D592B7180F0000EFC62 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B27D582B7180F0000EFC62 /* Coordinator.swift */; };
+		A9B27D5D2B72898C000EFC62 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B27D5C2B72898C000EFC62 /* MainCoordinator.swift */; };
+		A9B27D5F2B728A6D000EFC62 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B27D5E2B728A6D000EFC62 /* FeedCoordinator.swift */; };
+		A9B27D612B728A92000EFC62 /* LogInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B27D602B728A92000EFC62 /* LogInCoordinator.swift */; };
+		A9B27D632B72A0C6000EFC62 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B27D622B72A0C6000EFC62 /* ProfileCoordinator.swift */; };
+		A9B27D652B72AE51000EFC62 /* LogInStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B27D642B72AE51000EFC62 /* LogInStateProvider.swift */; };
+		A9B27D672B7A92E3000EFC62 /* UserPlofileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B27D662B7A92E3000EFC62 /* UserPlofileCoordinator.swift */; };
 		A9BA804A2B5EFFF0006DDB9A /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA80492B5EFFF0006DDB9A /* TestUserService.swift */; };
 		A9C4060B2B586B4200C5A171 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4060A2B586B4200C5A171 /* UserService.swift */; };
 		A9C4060D2B586F3300C5A171 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4060C2B586F3300C5A171 /* CurrentUserService.swift */; };
@@ -89,6 +95,12 @@
 		A99FE9322B618E75003844DE /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 		A9B27D562B717E3A000EFC62 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		A9B27D582B7180F0000EFC62 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		A9B27D5C2B72898C000EFC62 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		A9B27D5E2B728A6D000EFC62 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		A9B27D602B728A92000EFC62 /* LogInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInCoordinator.swift; sourceTree = "<group>"; };
+		A9B27D622B72A0C6000EFC62 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		A9B27D642B72AE51000EFC62 /* LogInStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInStateProvider.swift; sourceTree = "<group>"; };
+		A9B27D662B7A92E3000EFC62 /* UserPlofileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPlofileCoordinator.swift; sourceTree = "<group>"; };
 		A9BA80492B5EFFF0006DDB9A /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		A9C4060A2B586B4200C5A171 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		A9C4060C2B586F3300C5A171 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
@@ -209,6 +221,12 @@
 			children = (
 				A9B27D562B717E3A000EFC62 /* AppCoordinator.swift */,
 				A9B27D582B7180F0000EFC62 /* Coordinator.swift */,
+				A9B27D5C2B72898C000EFC62 /* MainCoordinator.swift */,
+				A9B27D5E2B728A6D000EFC62 /* FeedCoordinator.swift */,
+				A9B27D602B728A92000EFC62 /* LogInCoordinator.swift */,
+				A9B27D642B72AE51000EFC62 /* LogInStateProvider.swift */,
+				A9B27D622B72A0C6000EFC62 /* ProfileCoordinator.swift */,
+				A9B27D662B7A92E3000EFC62 /* UserPlofileCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -422,13 +440,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9B27D652B72AE51000EFC62 /* LogInStateProvider.swift in Sources */,
 				A9D85F872B28E56B0008B461 /* PhotosTableViewCell.swift in Sources */,
 				A9D85F8B2B2A39720008B461 /* PhotosCollectionViewCell.swift in Sources */,
+				A9B27D672B7A92E3000EFC62 /* UserPlofileCoordinator.swift in Sources */,
 				A95240FE2B1663CF00F414CE /* TabViewController.swift in Sources */,
 				A9D21DD52B06B2B10016BAAF /* PostViewController.swift in Sources */,
 				A991AD9C2B60538C0067D1A5 /* AlertController.swift in Sources */,
 				A95241002B1E64BC00F414CE /* LogInViewController.swift in Sources */,
 				A98C4F822B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift in Sources */,
+				A9B27D5F2B728A6D000EFC62 /* FeedCoordinator.swift in Sources */,
+				A9B27D632B72A0C6000EFC62 /* ProfileCoordinator.swift in Sources */,
 				A9D85F892B29054E0008B461 /* UserModel.swift in Sources */,
 				A9C4060D2B586F3300C5A171 /* CurrentUserService.swift in Sources */,
 				A98C4F872B6ACC440011F2B8 /* Service.swift in Sources */,
@@ -445,8 +467,10 @@
 				A9D21DCF2B06AB480016BAAF /* FeedViewController.swift in Sources */,
 				A95240FC2B165DC500F414CE /* ProfileViewController.swift in Sources */,
 				A99FE9332B618E75003844DE /* MyLoginFactory.swift in Sources */,
+				A9B27D612B728A92000EFC62 /* LogInCoordinator.swift in Sources */,
 				A9C4060B2B586B4200C5A171 /* UserService.swift in Sources */,
 				A9B27D592B7180F0000EFC62 /* Coordinator.swift in Sources */,
+				A9B27D5D2B72898C000EFC62 /* MainCoordinator.swift in Sources */,
 				A9BA804A2B5EFFF0006DDB9A /* TestUserService.swift in Sources */,
 				A9115EAF2B6305FB00F609F7 /* CustomButton.swift in Sources */,
 				A9D21DBD2B06A42F0016BAAF /* SceneDelegate.swift in Sources */,
