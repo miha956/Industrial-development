@@ -21,7 +21,8 @@ class PhotosViewController: UIViewController {
     
     private let userData = User.make()
     private var userPhotos: [UIImage] = []
-    
+    private let imageProcessor = ImageProcessor()
+    private let clock = ContinuousClock()
     // MARK: - SubViews
     
     private lazy var photosCollectionView: UICollectionView = {
@@ -49,7 +50,25 @@ class PhotosViewController: UIViewController {
         setupConstraints()
         collectionView()
         facade.subscribe(self)
-        facade.addImagesWithTimer(time: 1, repeat: 20, userImages: userData.photos)
+        let result = clock.measure {
+            imageProcessor.processImagesOnThread(sourceImages: userData.photos,
+                                                 filter: .chrome,
+                                                 qos: .default) { [weak self] images in
+                self?.userPhotos = images.map({ image in
+                    UIImage(cgImage: image!)
+                })
+                DispatchQueue.main.async {
+                    self?.photosCollectionView.reloadData()
+                }
+            }
+        }
+        print(result)
+        
+        // background 4.8375e-05 seconds
+        // default 6.9791e-05 seconds
+        // userInitiated 4.2208e-05 seconds
+        // userInteractive 6.0417e-05 seconds
+        // utility 8.4834e-05 seconds
     }
     
     deinit {
@@ -88,7 +107,8 @@ class PhotosViewController: UIViewController {
 extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        userPhotos.count
+       userPhotos.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
