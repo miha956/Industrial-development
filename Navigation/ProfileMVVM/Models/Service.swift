@@ -11,7 +11,7 @@ import UIKit
 class Service {
     
     private var users = [
-        User(login: "misha", password: "123123", name: "Cat",
+        User(login: "misha", password: "123a", name: "Cat",
              status: "I AM SUPER CAT",
              avatarImage: UIImage(named: "cat"),
              photos: (1...20).map { UIImage(named: "\($0)")!}),

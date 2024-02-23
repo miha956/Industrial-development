@@ -17,7 +17,8 @@ class TabViewController: UITabBarController {
     
     private func setTabBar() {
         let service = Service()
-        let modelView = LogInViewModel(service: service)
+        let brutForsePassword = BrutForsePassword()
+        let modelView = LogInViewModel(service: service, brutForsePassword: brutForsePassword)
         let loginVC = LogInViewControllerMVVM(viewModel: modelView)
         
         let navigationController = UINavigationController(rootViewController: FeedViewController())
