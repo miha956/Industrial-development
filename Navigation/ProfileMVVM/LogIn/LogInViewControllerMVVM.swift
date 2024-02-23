@@ -71,7 +71,6 @@ class LogInViewControllerMVVM: UIViewController {
         passwordTextField.layer.masksToBounds = true
         passwordTextField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
-        passwordTextField.text = "123123"
         passwordTextField.delegate = self
         return passwordTextField
     }()
@@ -98,12 +97,21 @@ class LogInViewControllerMVVM: UIViewController {
         logInButton.addTarget(self, action: #selector(tapLogIn), for: .touchUpInside)
         return logInButton
     }()
-    private let activityIndicator: UIActivityIndicatorView = {
+    private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.tintColor = .darkGray
+        indicator.isHidden = true
         return indicator
     }()
+    private lazy var brutPasswordButton: UIButton = {
+        let brutPasswordButton = UIButton(type: .system)
+        brutPasswordButton.translatesAutoresizingMaskIntoConstraints = false
+        brutPasswordButton.setTitle("BturForse password", for: .normal)
+        brutPasswordButton.addTarget(self, action: #selector(brutForce), for: .touchUpInside)
+        return brutPasswordButton
+    }()
+    
     
 // MARK: - Lifecycle
     
@@ -127,7 +135,13 @@ class LogInViewControllerMVVM: UIViewController {
 // MARK: Actions
         
     @objc private func tapLogIn() {
-        viewModel.changeState(login: loginTextField.text!, password: passwordTextField.text!)
+        viewModel.changeState(login: loginTextField.text ?? "", password: passwordTextField.text ?? "")
+    }
+    @objc private func brutForce() {
+        let queue = DispatchQueue(label: "someQueueFast", qos: .userInteractive)
+        queue.async { [weak self] in
+            self?.viewModel.brutForse(passwordToUnlock: "123a")
+        }
     }
     
     private func bindViewModel() {
@@ -162,6 +176,32 @@ class LogInViewControllerMVVM: UIViewController {
                 }
             }
         }
+        viewModel.brutForseResult = { [weak self] state in
+            guard let self else { return }
+            switch state {
+            case .initial: break
+                //
+            case .loading:
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    self.passwordTextField.leftViewMode = .always
+                    self.passwordTextField.leftView = activityIndicator
+                    self.activityIndicator.startAnimating()
+                    self.passwordTextField.text = nil
+                    self.passwordTextField.placeholder = ""
+                }
+            case .fetched(let password):
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    self.passwordTextField.isSecureTextEntry = false
+                    self.passwordTextField.text = password
+                    self.activityIndicator.stopAnimating()
+                    passwordTextField.leftView = nil
+                }
+            case .error: break
+                //
+            }
+        }
     }
     
 // MARK: UI Setup
@@ -179,6 +219,7 @@ class LogInViewControllerMVVM: UIViewController {
         logInStackview.addArrangedSubview(passwordTextField)
         contentView.addSubview(logInStackview)
         contentView.addSubview(logInButton)
+        contentView.addSubview(brutPasswordButton)
         view.addSubview(activityIndicator)
     }
     private func setupConstraints() {
@@ -214,7 +255,12 @@ class LogInViewControllerMVVM: UIViewController {
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            
+            brutPasswordButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 16),
+            brutPasswordButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            brutPasswordButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            brutPasswordButton.heightAnchor.constraint(equalToConstant: 20),
+            brutPasswordButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
             
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
