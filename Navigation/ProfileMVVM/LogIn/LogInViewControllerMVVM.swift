@@ -111,6 +111,17 @@ class LogInViewControllerMVVM: UIViewController {
         brutPasswordButton.addTarget(self, action: #selector(brutForce), for: .touchUpInside)
         return brutPasswordButton
     }()
+    var context: Float = 0
+    private var timer: Timer?
+    private var timerLabel: UILabel = {
+        let timerLabel = UILabel()
+        timerLabel.translatesAutoresizingMaskIntoConstraints = false
+        timerLabel.text = "0:00"
+        timerLabel.textAlignment = .center
+        timerLabel.textColor = .systemBlue
+        return timerLabel
+    }()
+    
     
     
 // MARK: - Lifecycle
@@ -139,8 +150,23 @@ class LogInViewControllerMVVM: UIViewController {
     }
     @objc private func brutForce() {
         let queue = DispatchQueue(label: "someQueueFast", qos: .userInteractive)
+        timerLabel.text = "0:00"
+        context = 0
+        timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { [weak self] timer in
+            guard let self else { return }
+            context += 0.2
+            timerLabel.text = String(context)
+        }
+        timer?.fire()
         queue.async { [weak self] in
             self?.viewModel.brutForse(passwordToUnlock: "123a")
+            self?.timer?.invalidate()
+            self?.timer = nil
+            self?.timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { [weak self] timer in
+                guard let self else { return }
+                context += 0.2
+                timerLabel.text = String(context)
+            }
         }
     }
     
@@ -220,6 +246,7 @@ class LogInViewControllerMVVM: UIViewController {
         contentView.addSubview(logInStackview)
         contentView.addSubview(logInButton)
         contentView.addSubview(brutPasswordButton)
+        contentView.addSubview(timerLabel)
         view.addSubview(activityIndicator)
     }
     private func setupConstraints() {
@@ -260,7 +287,12 @@ class LogInViewControllerMVVM: UIViewController {
             brutPasswordButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             brutPasswordButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             brutPasswordButton.heightAnchor.constraint(equalToConstant: 20),
-            brutPasswordButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            
+            timerLabel.topAnchor.constraint(equalTo: brutPasswordButton.bottomAnchor, constant: 16),
+            timerLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            timerLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            timerLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            
             
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
