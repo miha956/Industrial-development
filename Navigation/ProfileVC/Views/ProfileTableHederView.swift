@@ -13,6 +13,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     // MARK: - Properties
     
     private var avatarOriginPoint = CGPoint()
+    weak var delegate: ProfileViewControllerDelegate?
     
     // MARK: - Subviews
     
@@ -128,12 +129,40 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     // MARK: - Actions
     
     @objc func buttonPressed() {
-        //print(statusLabel.text)
+        do {
+            let status = try checkStatus(status: statusTextField.text ?? "")
+            DispatchQueue.main.async { [weak self] in
+                self?.statusLabel.text = status
+            }
+        } catch StatusError.tooShort {
+            print("статус слишком короткий")
+            delegate?.statusSat(message: "статус слишком короткий")
+        } catch StatusError.tooLong {
+            print("статус слишком длинный")
+            delegate?.statusSat(message: "статус слишком длинный")
+        } catch let error{
+            print(error)
+        }
+    }
+    
+    func checkStatus(status: String) throws -> String {
+        if status.count <= 2 {
+            throw StatusError.tooShort
+        } else if status.count > 5 {
+            throw StatusError.tooLong
+        } else {
+            return status
+        }
+    }
+    
+    enum StatusError: Error {
+        case tooShort
+        case tooLong
     }
     
     @objc func statusTextChanged(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        statusLabel.text = text
+//        guard let text = textField.text else { return }
+//        statusLabel.text = text
     }
     
     @objc func avatarOpened(target: UIView) {

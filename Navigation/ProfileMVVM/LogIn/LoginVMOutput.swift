@@ -19,7 +19,7 @@ enum UserLogInState {
     case initial
     case loading
     case logined(User)
-    case error
+    case error(CustomError)
 }
 
 enum BrutForsePasswordState {

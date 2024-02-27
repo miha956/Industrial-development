@@ -108,9 +108,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: HeaderFooterReuseID.base.rawValue) as? 
             ProfileHeaderView else {
             fatalError("could not dequeueReusableCell")
-            
         }
         if section == 0 {
+            headerView.delegate = self
             headerView.update(user: currenyUser)
             return headerView
         } else {
@@ -163,5 +163,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(vc, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+protocol ProfileViewControllerDelegate: AnyObject {
+    func statusSat(message: String)
+}
+
+extension ProfileViewController: ProfileViewControllerDelegate {
+    func statusSat(message: String) {
+        showAlert(title: "Message", message: message, target: self, handler: nil)
     }
 }

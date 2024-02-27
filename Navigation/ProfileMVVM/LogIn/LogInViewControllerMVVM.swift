@@ -72,6 +72,7 @@ class LogInViewControllerMVVM: UIViewController {
         passwordTextField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
         passwordTextField.delegate = self
+        passwordTextField.text = "123a"
         return passwordTextField
     }()
     private lazy var logInStackview: UIStackView = {
@@ -191,8 +192,8 @@ class LogInViewControllerMVVM: UIViewController {
                         let vc = ProfileViewController(currenyUser: user)
                         navigationController?.pushViewController(vc, animated: true)
                     }
-                case .error:
-                    print("error")
+                case .error(let error):
+                print(error.description)
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
                     activityIndicator.isHidden = true
