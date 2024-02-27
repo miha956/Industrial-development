@@ -36,8 +36,8 @@ final class LogInViewModel: LoginVMOutput {
             switch result {
                 case .success(let user):
                     userLoinState = .logined(user)
-                case .failure(_):
-                    userLoinState = .error
+                case .failure(let error):
+                userLoinState = .error(error)
             }
         }
     }

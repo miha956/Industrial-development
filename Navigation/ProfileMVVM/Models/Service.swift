@@ -25,11 +25,13 @@ class Service {
              photos: (1...20).map { UIImage(named: "\($0)")!})
         ]
     
-    func fetchUser(login: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {
+    func fetchUser(login: String, password: String, completion: @escaping (Result<User, CustomError>) -> Void) {
         // Имитирует запрос данных из сети (делая паузу в 1 секунду)
+        // тут применили Result
         DispatchQueue.global().asyncAfter(deadline: .now() + 1, execute: { [weak self] in
-            guard let self else { return}
-            // Главное
+            guard let self = self else {
+                preconditionFailure("self must be")
+            }
             var i = 0
             for user in users {
                 i += 1
@@ -45,15 +47,16 @@ class Service {
         
 }
 
-enum CustomError {
+enum CustomError: Error {
     case noUser
-}
-
-extension CustomError: LocalizedError {
-    public var errorDescription: String? {
+    
+    var description: String  {
         switch self {
-        case .noUser: return "no such user"
+        case .noUser:
+            return "No such user"
         }
     }
 }
+
+
 
