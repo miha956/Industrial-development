@@ -20,11 +20,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        var appConfiguration: AppConfiguration
+        //var appConfiguration: AppConfiguration
         //appConfiguration = .people(URL(string: "https://swapi.dev/api/people/8")!)
-        appConfiguration = .planets(URL(string: "https://swapi.dev/api/planets/5")!)
+        //appConfiguration = .planets(URL(string: "https://swapi.dev/api/planets/5")!)
         //appConfiguration = .starships(URL(string: "https://swapi.dev/api/starships/3")!)
-        NetworkService.request(configuration: appConfiguration)
+        //NetworkService.request(configuration: appConfiguration)
+
 
         
         window.rootViewController = TabViewController()

@@ -54,7 +54,51 @@ struct NetworkService {
             }
         }
         task.resume()
+    }
+    
+    static func requestTitle(completion: @escaping (Result<String, Error>) -> Void) {
+        let urlString = "https://jsonplaceholder.typicode.com/todos/1"
         
+        guard let url = URL(string: urlString) else { return }
+        let session = URLSession.shared
+        let task = session.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+            }
+            guard let data = data else { return }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+                guard let title = json!["title"] as? String else { return }
+                completion(.success(title))
+            } catch let (jsonError){
+                print("json error \(jsonError.localizedDescription)")
+            }
+        }
+        
+        task.resume()
+    }
+    
+    static func fetchPlanet(completion: @escaping (Result<Planet, Error>) -> Void) {
+        let urlString = "https://swapi.dev/api/planets/1"
+        
+        guard let url = URL(string: urlString) else { return }
+        let session = URLSession.shared
+        let task = session.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+            }
+            guard let data = data else { return }
+            
+            do {
+                let planet = try JSONDecoder().decode(Planet.self, from: data)
+                completion(.success(planet))
+            } catch let (jsonError){
+                print("json error \(jsonError.localizedDescription)")
+            }
+        }
+        
+        task.resume()
     }
     
 }
