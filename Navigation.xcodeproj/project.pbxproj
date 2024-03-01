@@ -13,6 +13,8 @@
 		A95240FE2B1663CF00F414CE /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95240FD2B1663CF00F414CE /* TabViewController.swift */; };
 		A95241002B1E64BC00F414CE /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95240FF2B1E64BC00F414CE /* LogInViewController.swift */; };
 		A959D2C32B923E23002D29BD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A959D2C22B923E23002D29BD /* NetworkService.swift */; };
+		A959D2C52B925A08002D29BD /* TitleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A959D2C42B925A08002D29BD /* TitleModel.swift */; };
+		A959D2C92B92699B002D29BD /* PlanetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A959D2C82B92699B002D29BD /* PlanetModel.swift */; };
 		A97E4B232B879094003ECA52 /* BrutForsePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97E4B222B879094003ECA52 /* BrutForsePassword.swift */; };
 		A98C4F822B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98C4F812B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift */; };
 		A98C4F842B6AC68C0011F2B8 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98C4F832B6AC68C0011F2B8 /* LogInViewModel.swift */; };
@@ -78,6 +80,8 @@
 		A95240FD2B1663CF00F414CE /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		A95240FF2B1E64BC00F414CE /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		A959D2C22B923E23002D29BD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A959D2C42B925A08002D29BD /* TitleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleModel.swift; sourceTree = "<group>"; };
+		A959D2C82B92699B002D29BD /* PlanetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetModel.swift; sourceTree = "<group>"; };
 		A97E4B222B879094003ECA52 /* BrutForsePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrutForsePassword.swift; sourceTree = "<group>"; };
 		A98C4F812B6AC2B50011F2B8 /* LogInViewControllerMVVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewControllerMVVM.swift; sourceTree = "<group>"; };
 		A98C4F832B6AC68C0011F2B8 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				A959D2C22B923E23002D29BD /* NetworkService.swift */,
+				A959D2C42B925A08002D29BD /* TitleModel.swift */,
+				A959D2C82B92699B002D29BD /* PlanetModel.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -424,6 +430,7 @@
 			files = (
 				A9D85F872B28E56B0008B461 /* PhotosTableViewCell.swift in Sources */,
 				A9D85F8B2B2A39720008B461 /* PhotosCollectionViewCell.swift in Sources */,
+				A959D2C92B92699B002D29BD /* PlanetModel.swift in Sources */,
 				A95240FE2B1663CF00F414CE /* TabViewController.swift in Sources */,
 				A97E4B232B879094003ECA52 /* BrutForsePassword.swift in Sources */,
 				A9D21DD52B06B2B10016BAAF /* PostViewController.swift in Sources */,
@@ -452,6 +459,7 @@
 				A9D7FF252B642C22005C1509 /* FeedModel.swift in Sources */,
 				A959D2C32B923E23002D29BD /* NetworkService.swift in Sources */,
 				A95240FA2B165D9400F414CE /* ProfileTableHederView.swift in Sources */,
+				A959D2C52B925A08002D29BD /* TitleModel.swift in Sources */,
 				A9FBB6832B21D71F0063A102 /* PostTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
