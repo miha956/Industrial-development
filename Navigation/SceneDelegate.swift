@@ -18,11 +18,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let window = UIWindow(windowScene: windowScene)        
+        let window = UIWindow(windowScene: windowScene)
+        
+        var appConfiguration: AppConfiguration
+        //appConfiguration = .people(URL(string: "https://swapi.dev/api/people/8")!)
+        appConfiguration = .planets(URL(string: "https://swapi.dev/api/planets/5")!)
+        //appConfiguration = .starships(URL(string: "https://swapi.dev/api/starships/3")!)
+        NetworkService.request(configuration: appConfiguration)
+
         
         window.rootViewController = TabViewController()
         window.makeKeyAndVisible()
-        
         self.window = window
     }
 
