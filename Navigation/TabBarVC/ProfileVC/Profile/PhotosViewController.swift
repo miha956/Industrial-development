@@ -15,14 +15,11 @@ class PhotosViewController: UIViewController {
     private enum Constants {
         static let photoSpacing: CGFloat = 8
     }
-    let facade = ImagePublisherFacade()
     
     // MARK: -  Data
     
     private let userData = User.make()
-    private var userPhotos: [UIImage] = []
-    private let imageProcessor = ImageProcessor()
-    private let clock = ContinuousClock()
+
     // MARK: - SubViews
     
     private lazy var photosCollectionView: UICollectionView = {
@@ -48,33 +45,6 @@ class PhotosViewController: UIViewController {
         addSubviews()
         setupConstraints()
         collectionView()
-        facade.subscribe(self)
-        
-        let result = self.clock.measure {
-               let start = clock.now
-               imageProcessor.processImagesOnThread(sourceImages: userData.photos,
-                                                    filter: .colorInvert,
-                                                    qos: .utility) { [weak self] images in
-                   self?.userPhotos = images.map({ image in
-                       UIImage(cgImage: image!)
-                       
-                   })
-                   print(self!.clock.now - start)
-                   DispatchQueue.main.async {
-                       self?.photosCollectionView.reloadData()
-                   }
-               }
-           }
-
-        // background 5.3662775 seconds
-        // default 1.168130167 seconds
-        // userInitiated 1.174186291 seconds
-        // userInteractive 1.109212083 seconds
-        // utility 1.221302458 seconds
-    }
-    
-    deinit {
-        facade.removeSubscription(for: self)
     }
     
     // MARK: - Private
@@ -109,7 +79,7 @@ class PhotosViewController: UIViewController {
 extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       userPhotos.count
+        userData.photos.count
         
     }
     
@@ -121,17 +91,8 @@ extension PhotosViewController: UICollectionViewDataSource {
             fatalError("could not dequeueReusableCell")
         }
         
-        photosCell.setupData(image: userPhotos[indexPath.row])
+        photosCell.setupData(image: userData.photos[indexPath.row])
         
         return photosCell
-    }
-}
-
-extension PhotosViewController: ImageLibrarySubscriber {
-    
-    func receive(images: [UIImage]) {
-        userPhotos = images
-        photosCollectionView.reloadData()
-        print("image added")
     }
 }

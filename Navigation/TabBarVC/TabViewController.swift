@@ -7,8 +7,11 @@
 
 import UIKit
 
-class TabViewController: UITabBarController {
+class TabBarViewController: UITabBarController {
 
+    
+    weak var mainTableViewCoordinator: MainTableViewCoordinator?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabBar()
@@ -17,9 +20,8 @@ class TabViewController: UITabBarController {
     
     private func setTabBar() {
         let service = Service()
-        let brutForsePassword = BrutForsePassword()
-        let modelView = LogInViewModel(service: service, brutForsePassword: brutForsePassword)
-        let loginVC = LogInViewControllerMVVM(viewModel: modelView)
+        let modelView = LogInViewModel(service: service)
+        let loginVC = LogInViewController(viewModel: modelView)
         
         let navigationController = UINavigationController(rootViewController: FeedViewController())
         let navigationController2 = UINavigationController(rootViewController: loginVC)

@@ -10,9 +10,8 @@ import Foundation
 protocol LoginVMOutput {
     var userLoinState: UserLogInState { get set }
     var currentState: ((UserLogInState) -> Void)? { get set }
-    var brutForseResult: ((BrutForsePasswordState) ->Void)? { get set }
     func changeState(login: String, password: String)
-    func brutForse(passwordToUnlock: String)
+
 }
 
 enum UserLogInState {
@@ -22,9 +21,3 @@ enum UserLogInState {
     case error(CustomError)
 }
 
-enum BrutForsePasswordState {
-    case initial
-    case loading
-    case fetched(String)
-    case error
-}
