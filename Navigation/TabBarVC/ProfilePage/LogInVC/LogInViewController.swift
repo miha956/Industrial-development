@@ -10,8 +10,8 @@ import UIKit
 class LogInViewController: UIViewController {
     
     // MARK: - Properties
-    
-    private var viewModel: LoginVMOutput
+    weak var logInCoordinator: LogInCoordinatorProtocol?
+    private var logInViewModel: LoginVMOutput
     private var user: User? = nil
     
     // MARK: - SubViews
@@ -93,8 +93,19 @@ class LogInViewController: UIViewController {
         logInButton.translatesAutoresizingMaskIntoConstraints = false
         logInButton.setTitle("Log In", for: .normal)
         logInButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        logInButton.addTarget(self, action: #selector(tapLogIn), for: .touchUpInside)
+        logInButton.addTarget(self, action: #selector(didLogInButtonTapped), for: .touchUpInside)
+        logInButton.isEnabled = false
         return logInButton
+    }()
+    private lazy var singUpButton: UIButton = {
+        let singUpButton = UIButton(type: .system)
+        singUpButton.backgroundColor = .clear
+        singUpButton.translatesAutoresizingMaskIntoConstraints = false
+        singUpButton.setTitle("Sing Up", for: .normal)
+        singUpButton.setTitleColor(.systemBlue, for: .normal)
+        singUpButton.titleLabel?.font = .systemFont(ofSize: 12)
+        singUpButton.addTarget(self, action: #selector(didSingUpButtonTapped), for: .touchUpInside)
+        return singUpButton
     }()
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
@@ -107,7 +118,8 @@ class LogInViewController: UIViewController {
     // MARK: - Lifecycle
         
     init(viewModel: LoginVMOutput) {
-        self.viewModel = viewModel
+        
+        self.logInViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -134,10 +146,22 @@ class LogInViewController: UIViewController {
         removeKeyboardObservers()
     }
     
+    deinit {
+        print("LogInViewController deinit")
+    }
+    
     // MARK: Actions
         
+    @objc private func didLogInButtonTapped() {
+        logInViewModel.changeState(login: loginTextField.text ?? "", password: passwordTextField.text ?? "")
+    }
+    
+    @objc private func didSingUpButtonTapped() {
+        logInCoordinator?.singUp()
+    }
+    
         private func bindViewModel() {
-            viewModel.currentState = { [weak self] state in
+            logInViewModel.currentState = { [weak self] state in
                 guard let self else { return }
                 
                 switch state {
@@ -154,11 +178,10 @@ class LogInViewController: UIViewController {
                         activityIndicator.isHidden = true
                         activityIndicator.stopAnimating()
                         contentView.isHidden = false
-                        let vc = ProfileViewController(currenyUser: user)
-                        navigationController?.pushViewController(vc, animated: true)
+                        logInCoordinator?.logIn()
                     }
                 case .error(let error):
-                    print(error.description)
+                    print(error.localizedDescription)
                     DispatchQueue.main.async { [weak self] in
                         guard let self else { return }
                         activityIndicator.isHidden = true
@@ -185,6 +208,7 @@ class LogInViewController: UIViewController {
             logInStackview.addArrangedSubview(passwordTextField)
             contentView.addSubview(logInStackview)
             contentView.addSubview(logInButton)
+            contentView.addSubview(singUpButton)
             view.addSubview(activityIndicator)
         }
         private func setupConstraints() {
@@ -216,8 +240,10 @@ class LogInViewController: UIViewController {
                 logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
                 logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
                 logInButton.heightAnchor.constraint(equalToConstant: 50),
-                logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
                 
+                singUpButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 5),
+                singUpButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                singUpButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
                 
                 activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -240,8 +266,20 @@ extension LogInViewController: UITextFieldDelegate {
         _ textField: UITextField
     ) -> Bool {
         textField.resignFirstResponder()
-        
+
         return true
+    }
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        
+        guard let mail = loginTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        // implenemt notofication
+        
+        if (mail.count >= 6) && (password.count >= 6) {
+            logInButton.isEnabled = true
+        } else {
+            logInButton.isEnabled = false
+        }
     }
 }
 
@@ -249,12 +287,6 @@ extension LogInViewController: UITextFieldDelegate {
 
 extension LogInViewController {
     
-
-    
-    @objc private func tapLogIn() {
-        viewModel.changeState(login: loginTextField.text ?? "", password: passwordTextField.text ?? "")
-    }
-
     @objc func willShowKeyboard(_ notification: NSNotification) {
     
         let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
@@ -263,7 +295,7 @@ extension LogInViewController {
     }
 
     @objc func willHideKeyboard(_ notification: NSNotification) {
-    scrollView.contentInset.bottom = 0.0
+        scrollView.contentInset.bottom = 0.0
     }
 
     private func setupKeyboardObservers() {

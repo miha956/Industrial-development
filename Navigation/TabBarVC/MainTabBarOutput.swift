@@ -9,7 +9,4 @@ import Foundation
 
 protocol MainTabBarOutput {
     
-    var userIsLogined: Bool { get set }
-    
-    func fetchUser()
 }

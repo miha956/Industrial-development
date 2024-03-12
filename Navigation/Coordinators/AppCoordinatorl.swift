@@ -19,30 +19,22 @@ class AppCoordinator: AppCoordinatorProtocol {
     
     var window: UIWindow
     
-    var rootViewController: UIViewController = UIViewController() {
-        didSet {
-                self.window.rootViewController = self.rootViewController
-    
-        }
-    }
-    
-    
+    var navigationController: UINavigationController = {
+        let navigationController = UINavigationController()
+        // set appereance navigationController
+        return navigationController
+    }()
     
     init(window: UIWindow) {
         self.window = window
-        self.window.rootViewController = rootViewController
+        self.window.rootViewController = navigationController
         self.window.makeKeyAndVisible()
     }
     
-    private func setCurrentCoordinator(coordinator: BaseCoordinatorProtocol) {
-        rootViewController = coordinator.rootViewController
-    }
-    
     func start() {
-        let mainTableViewCoordinator = MainTableViewCoordinator()
+        let mainTableViewCoordinator = MainTableViewCoordinator(navigationController: navigationController)
         addChildCoordinator(coordinator: mainTableViewCoordinator)
         mainTableViewCoordinator.start()
-        setCurrentCoordinator(coordinator: mainTableViewCoordinator)
     }
 
 }

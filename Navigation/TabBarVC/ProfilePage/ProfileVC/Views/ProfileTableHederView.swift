@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 import UIKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
@@ -129,20 +130,28 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     // MARK: - Actions
     
     @objc func buttonPressed() {
+        
+        let firebaseAuth = Auth.auth()
         do {
-            let status = try checkStatus(status: statusTextField.text ?? "")
-            DispatchQueue.main.async { [weak self] in
-                self?.statusLabel.text = status
-            }
-        } catch StatusError.tooShort {
-            print("статус слишком короткий")
-            delegate?.statusSat(message: "статус слишком короткий")
-        } catch StatusError.tooLong {
-            print("статус слишком длинный")
-            delegate?.statusSat(message: "статус слишком длинный")
-        } catch let error{
-            print(error)
+          try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
         }
+        
+//        do {
+//            let status = try checkStatus(status: statusTextField.text ?? "")
+//            DispatchQueue.main.async { [weak self] in
+//                self?.statusLabel.text = status
+//            }
+//        } catch StatusError.tooShort {
+//            print("статус слишком короткий")
+//            delegate?.statusSat(message: "статус слишком короткий")
+//        } catch StatusError.tooLong {
+//            print("статус слишком длинный")
+//            delegate?.statusSat(message: "статус слишком длинный")
+//        } catch let error{
+//            print(error)
+//        }
     }
     
     func checkStatus(status: String) throws -> String {

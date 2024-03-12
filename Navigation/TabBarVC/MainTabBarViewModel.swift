@@ -9,9 +9,5 @@ import Foundation
 
 final class MainTabBarViewModel: MainTabBarOutput {
     
-    var userIsLogined: Bool = false
     
-    func fetchUser() {
-        // fetchUser
-    }
 }

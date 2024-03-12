@@ -10,6 +10,6 @@ import UIKit
 
 protocol BaseCoordinatorProtocol: CoordinatorProtocol {
     
-    var rootViewController: UIViewController { get set }
+    var navigationController: UINavigationController { get }
 }
 

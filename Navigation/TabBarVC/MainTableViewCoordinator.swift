@@ -8,27 +8,41 @@
 import Foundation
 import UIKit
 
-//enum AppFlow {
-//    case profileView
-//    case logInView
-//}
-//
-//protocol MainBaseCoordinator: BaseCoordinatorProtocol {
-//    //var feedCoordinator: FeedCoordinatorProtocol { get }
-//    //var profileCoordinator: ProfileCoordinatorProtocol { get }
-//    func moveTo(flow: AppFlow)
-//}
 
+protocol MainTableViewCoordinatorProtocol: BaseCoordinatorProtocol {
+    //some flow
+}
 
-class MainTableViewCoordinator: BaseCoordinatorProtocol {
-    
-    var rootViewController: UIViewController = UIViewController()
+class MainTableViewCoordinator: MainTableViewCoordinatorProtocol {
     
     var childCoordinators: [CoordinatorProtocol] = []
+    var navigationController: UINavigationController
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
     
     func start() {
-        let tabViewController = TabBarViewController()
-        tabViewController.mainTableViewCoordinator = self
-        rootViewController = tabViewController
+    
+        let tabBarViewController = MainTabBarViewController()
+        tabBarViewController.mainTableViewCoordinator = self
+        let feedNavigationController = UINavigationController()
+        feedNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "house.fill"), tag: 0)
+        let feedCoordinator = FeedPageCoordinator(navigationController: feedNavigationController)
+        childCoordinators.append(feedCoordinator)
+        feedCoordinator.start()
+        
+        let profilePageNavigationController = UINavigationController()
+        profilePageNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+        let profilePageCoordinator = ProfilePageCoordinator(navigationController: profilePageNavigationController)
+        childCoordinators.append(profilePageCoordinator)
+        profilePageCoordinator.start()
+        
+        tabBarViewController.viewControllers = [
+            feedNavigationController,
+            profilePageNavigationController
+            ]
+
+        navigationController.pushViewController(tabBarViewController, animated: true)
     }
 }

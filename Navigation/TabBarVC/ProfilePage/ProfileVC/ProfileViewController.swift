@@ -12,8 +12,8 @@ class ProfileViewController: UIViewController {
         
     // MARK: - Data
     
-    fileprivate let data = Post.make()
-    fileprivate var currenyUser: User
+    private let data = Post.make()
+    private var currenyUser: User
     
     // MARK: - Subviews
     
@@ -39,6 +39,14 @@ class ProfileViewController: UIViewController {
         addSubviews()
         tuneTableView()
         setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
     }
     
     init(currenyUser: User) {
