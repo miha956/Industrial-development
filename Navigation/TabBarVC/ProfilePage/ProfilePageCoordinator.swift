@@ -32,5 +32,9 @@ final class ProfilePageCoordinator: ProfilePageCoordinatorProtocol {
             addChildCoordinator(coordinator: logInCoordinator)
             logInCoordinator.start()
         }
-    }  
+    }
+    
+    deinit {
+        print("ProfilePageCoordinatorProtocol deinit")
+    }
 }

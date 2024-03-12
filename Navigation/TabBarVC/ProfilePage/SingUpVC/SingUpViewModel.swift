@@ -27,7 +27,7 @@ final class SingUpViewModel: SingUpVMOutput {
         
         checkerService.signUp(email: email, password: password) { result in
             switch result {
-            case .success(let data):
+            case .success(_):
                 print("we have a user")
                 complition(true)
             case .failure(let error):

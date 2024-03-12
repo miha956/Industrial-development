@@ -17,20 +17,11 @@ protocol CheckerServiceProtocol {
 
 class CheckerService: CheckerServiceProtocol {
     
-    var users = [
-        User(login: "misha", password: "123a", name: "Cat",
-             status: "I AM SUPER CAT",
-             avatarImage: UIImage(named: "cat"),
-             photos: (1...20).map { UIImage(named: "\($0)")!}),
-        User(login: "murmur", password: "12345", name: "Cat",
-             status: "I AM SUPER CAT",
-             avatarImage: UIImage(named: "cat"),
-             photos: (1...20).map { UIImage(named: "\($0)")!}),
-        User(login: "cat", password: "321", name: "Cat",
-             status: "I AM SUPER CAT",
-             avatarImage: UIImage(named: "cat"),
-             photos: (1...20).map { UIImage(named: "\($0)")!})
-        ]
+    var user = User(login: "misha", password: "123a", name: "Cat",
+                     status: "I AM SUPER CAT",
+                     avatarImage: UIImage(named: "cat"),
+                     photos: (1...20).map { UIImage(named: "\($0)")!})
+    
     
     func checkCredentials(email: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { authDataResult, error in
@@ -40,7 +31,7 @@ class CheckerService: CheckerServiceProtocol {
                     print(error.localizedDescription)
             }
             guard let authDataResult = authDataResult else { return }
-                completion(.success(self.users[0]))
+                completion(.success(self.user))
         }
     }
     
@@ -53,5 +44,9 @@ class CheckerService: CheckerServiceProtocol {
             guard let authResult = authResult else { return }
                 completion(.success(authResult))
         }
+    }
+    
+    deinit {
+        print("CheckerService deinit")
     }
 }

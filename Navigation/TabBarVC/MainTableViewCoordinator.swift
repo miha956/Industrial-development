@@ -45,4 +45,8 @@ class MainTableViewCoordinator: MainTableViewCoordinatorProtocol {
 
         navigationController.pushViewController(tabBarViewController, animated: true)
     }
+    
+    deinit {
+        print("MainTableViewCoordinator deinit")
+    }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class LogInViewModel: LoginVMOutput {
     
@@ -34,8 +35,12 @@ final class LogInViewModel: LoginVMOutput {
         }
     }
     
-    func checkUserCreditails(login: String, password: String) {
-        // checkUserCreditails
+    func loginButtonEnabled(email: String, password: String, logInButton: UIButton) {
+        if (email.count >= 6) && (password.count >= 6) {
+            logInButton.isEnabled = true
+        } else {
+            logInButton.isEnabled = false
+        }
     }
     
 }

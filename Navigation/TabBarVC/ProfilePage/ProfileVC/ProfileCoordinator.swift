@@ -31,4 +31,8 @@ final class ProfileCoordinator: ProfileCoordinatorProtocol {
     func presentUserPhotos() {
         // presentUserPhotos
     }
+    
+    deinit {
+        print("ProfileCoordinatorProtocol deinit")
+    }
 }

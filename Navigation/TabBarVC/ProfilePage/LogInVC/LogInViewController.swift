@@ -10,9 +10,9 @@ import UIKit
 class LogInViewController: UIViewController {
     
     // MARK: - Properties
+    
     weak var logInCoordinator: LogInCoordinatorProtocol?
     private var logInViewModel: LoginVMOutput
-    private var user: User? = nil
     
     // MARK: - SubViews
     
@@ -153,7 +153,12 @@ class LogInViewController: UIViewController {
     // MARK: Actions
         
     @objc private func didLogInButtonTapped() {
-        logInViewModel.changeState(login: loginTextField.text ?? "", password: passwordTextField.text ?? "")
+        
+        guard let login = loginTextField.text, let password = passwordTextField.text else {
+            return
+        }
+        
+        logInViewModel.changeState(login: login, password: password)
     }
     
     @objc private func didSingUpButtonTapped() {
@@ -174,20 +179,18 @@ class LogInViewController: UIViewController {
                 case .logined(let user):
                     DispatchQueue.main.async { [weak self] in
                         guard let self else { return }
-                        self.user = user
                         activityIndicator.isHidden = true
                         activityIndicator.stopAnimating()
                         contentView.isHidden = false
                         logInCoordinator?.logIn()
                     }
                 case .error(let error):
-                    print(error.localizedDescription)
                     DispatchQueue.main.async { [weak self] in
                         guard let self else { return }
                         activityIndicator.isHidden = true
                         activityIndicator.stopAnimating()
                         contentView.isHidden = false
-                        showAlert(title: "Login or password is wrong", message: "Please, try again", target: self, handler: nil)
+                        showAlert(title: "Sorry, creditails are wrong", message: error.localizedDescription, target: self, handler: nil)
                     }
                 }
             }
@@ -271,15 +274,10 @@ extension LogInViewController: UITextFieldDelegate {
     }
     func textFieldDidChangeSelection(_ textField: UITextField) {
         
-        guard let mail = loginTextField.text else { return }
+        guard let email = loginTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         // implenemt notofication
-        
-        if (mail.count >= 6) && (password.count >= 6) {
-            logInButton.isEnabled = true
-        } else {
-            logInButton.isEnabled = false
-        }
+        logInViewModel.loginButtonEnabled(email: email, password: password, logInButton: logInButton)
     }
 }
 

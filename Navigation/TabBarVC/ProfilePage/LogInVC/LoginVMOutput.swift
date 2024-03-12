@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
 protocol LoginVMOutput {
     var userLoinState: UserLogInState { get set }
     var currentState: ((UserLogInState) -> Void)? { get set }
     func changeState(login: String, password: String)
     
-    func checkUserCreditails(login: String, password: String)
+    func loginButtonEnabled(email: String, password: String, logInButton: UIButton)
 
 }
 

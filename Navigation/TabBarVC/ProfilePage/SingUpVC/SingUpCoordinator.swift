@@ -34,4 +34,8 @@ import UIKit
         addChildCoordinator(coordinator: profileCoordinator)
         profileCoordinator.start()   
     }
+        
+    deinit {
+        print("SingUpCoordinatorProtocol deinit")
+    }
 }

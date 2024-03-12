@@ -42,4 +42,8 @@ final class LogInCoordinator: LogInCoordinatorProtocol {
         addChildCoordinator(coordinator: singUpCoordinator)
         singUpCoordinator.start()
     }
+    
+    deinit {
+        print("LogInCoordinator deinit")
+    }
 }
