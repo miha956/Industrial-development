@@ -10,7 +10,7 @@ import UIKit
 
 class Service {
     
-    private var users = [
+    var users = [
         User(login: "misha", password: "123a", name: "Cat",
              status: "I AM SUPER CAT",
              avatarImage: UIImage(named: "cat"),

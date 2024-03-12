@@ -129,6 +129,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     // MARK: - Actions
     
     @objc func buttonPressed() {
+        
         do {
             let status = try checkStatus(status: statusTextField.text ?? "")
             DispatchQueue.main.async { [weak self] in

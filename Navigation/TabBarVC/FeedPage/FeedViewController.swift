@@ -9,18 +9,22 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
+    weak var feedViewCoordinator: FeedPageCoordinatorProtocol?
+    
     // MARK: - SubViews
     
     let resultLabel: UILabel = {
         let resultLabel = UILabel()
         resultLabel.translatesAutoresizingMaskIntoConstraints = false
         resultLabel.backgroundColor = .white
+        resultLabel.text = "text"
         return resultLabel
     }()
     let planetLabel: UILabel = {
         let planetLabel = UILabel()
         planetLabel.translatesAutoresizingMaskIntoConstraints = false
         planetLabel.backgroundColor = .white
+        planetLabel.text = "text"
         return planetLabel
     }()
     
@@ -36,28 +40,6 @@ class FeedViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(tapGesture)
         
-        NetworkService.requestTitle { result in
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                switch result {
-                case .success(let title):
-                    self.resultLabel.text = title
-                case.failure(let error):
-                    self.resultLabel.text = error.localizedDescription
-                }
-            }
-        }
-        NetworkService.fetchPlanet { result in
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                switch result {
-                case .success(let planet):
-                    self.planetLabel.text = planet.orbitalPeriod
-                case.failure(let error):
-                    self.planetLabel.text = error.localizedDescription
-                }
-            }
-        }
     }
     
     // MARK: - Actions
