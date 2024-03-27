@@ -12,8 +12,9 @@ class ProfileViewController: UIViewController {
         
     // MARK: - Data
     
-    private let data = Post.make()
+    private let data = PostStruct.make()
     private var currenyUser: User
+    private let coreDataManager: CoreDataManagerProtocol
     
     // MARK: - Subviews
     
@@ -49,8 +50,9 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-    init(currenyUser: User) {
+    init(currenyUser: User, coreDataManager: CoreDataManagerProtocol) {
         self.currenyUser = currenyUser
+        self.coreDataManager = coreDataManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -59,7 +61,14 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Actions
-     
+    
+    @objc func postCellTapped(sender: UIGestureRecognizer) {
+        if let indexPath = ProfileViewController.tableView.indexPathForRow(at: sender.location(in: ProfileViewController.tableView)) {
+            coreDataManager.savePostToFavorite(item: data[indexPath.row])
+            print("post saved")
+        }
+    }
+    
     // MARK: - private
     
     private func setupView() {
@@ -147,6 +156,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 for: indexPath) as? PostTableViewCell else {
                 fatalError("could not dequeueReusableCell")
         }
+        let postCellTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(postCellTapped))
+        postCellTapRecognizer.numberOfTapsRequired = 2
+        postCell.isUserInteractionEnabled = true
+        postCell.addGestureRecognizer(postCellTapRecognizer)
+        
+        
         guard let photosCell = tableView.dequeueReusableCell(
                 withIdentifier: CellReuseID.photosCell.rawValue,
                 for: indexPath) as? PhotosTableViewCell else {

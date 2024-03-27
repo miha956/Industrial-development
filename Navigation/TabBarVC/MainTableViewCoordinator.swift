@@ -38,9 +38,14 @@ class MainTableViewCoordinator: MainTableViewCoordinatorProtocol {
         childCoordinators.append(profilePageCoordinator)
         profilePageCoordinator.start()
         
+        let coreDataManafer = CoreDataManager()
+        let favoritPageNavigationController = UINavigationController(rootViewController: FavoritPostsViewController(coreDataManager: coreDataManafer))
+        favoritPageNavigationController.tabBarItem = UITabBarItem(title: "FavorPosts", image: UIImage(systemName: "bookmark"), tag: 2)
+        
         tabBarViewController.viewControllers = [
             feedNavigationController,
-            profilePageNavigationController
+            profilePageNavigationController,
+            favoritPageNavigationController
             ]
 
         navigationController.pushViewController(tabBarViewController, animated: true)
