@@ -1,5 +1,5 @@
 //
-//  Post.swift
+//  PostStruct.swift
 //  Navigation
 //
 //  Created by Миша Вашкевич on 06.12.2023.
@@ -8,37 +8,45 @@
 import Foundation
 import UIKit
 
-public struct Post {
-    public let author: String
+public struct PostStruct {
+    public var author: String
     public var description: String
     public var image: UIImage?
     public var likes: Int
     public var views: Int
+    
+    public init(author: String, description: String, image: UIImage? = nil, likes: Int, views: Int) {
+        self.author = author
+        self.description = description
+        self.image = image
+        self.likes = likes
+        self.views = views
+    }
 }
 
-extension Post {
+extension PostStruct {
     
-    public static func make() -> [Post] {
+    public static func make() -> [PostStruct] {
         [ 
-            Post(
+            PostStruct(
             author: "Justin",
             description: "ahaha it's so funny",
             image: UIImage(named: "gag"),
             likes: 99,
             views: 109),
-            Post(
+            PostStruct(
             author: "Michael",
             description: "nature",
             image: UIImage(named: "nature"),
             likes: 66,
             views: 101),
-          Post(
+          PostStruct(
             author: "SpaceX",
             description: "let's go to stars",
             image: UIImage(named: "elon"),
             likes: 31,
             views: 34),
-          Post(
+          PostStruct(
             author: "Discovery",
             description: "hurry up, today a new episode with BearGrils, 10 ap at Discovert channel",
             image: UIImage(named: "discovery"),

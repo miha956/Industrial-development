@@ -24,7 +24,8 @@ final class ProfileCoordinator: ProfileCoordinatorProtocol {
     
     func start() {
         let user = Service().users[0]
-        let profileVc = ProfileViewController(currenyUser: user)
+        let coreDataManager = CoreDataManager()
+        let profileVc = ProfileViewController(currenyUser: user, coreDataManager: coreDataManager)
         navigationController.setViewControllers([profileVc], animated: true)
     }
     
